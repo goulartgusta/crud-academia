@@ -1,0 +1,8 @@
+# Ignorar diretórios de build
+/target/
+/bin/
+
+# Ignorar outros arquivos
+.classpath
+.project
+.settings/

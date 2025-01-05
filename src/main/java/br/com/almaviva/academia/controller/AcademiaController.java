@@ -1,26 +1,35 @@
 package br.com.almaviva.academia.controller;
 
-import java.util.Set;
-
 import br.com.almaviva.academia.model.Academia;
 import br.com.almaviva.academia.services.AcademiaService;
 
-public class AcademiaController {
-    private final AcademiaService service = new AcademiaService();
+import java.util.Map;
 
-    public void criarAcademia(Academia academia) {
-            service.criarAcademia(academia);
+public class AcademiaController {
+
+    private final AcademiaService service;
+
+    public AcademiaController() {
+        this.service = new AcademiaService();
     }
 
-    public Set<Academia> listarAcademias() {
-            return service.listarAcademias();
+    public Map<Integer, Academia> listarAcademias() {
+        return service.listarAcademias();
+    }
+
+    public Academia buscarAcademiaPorId(int id) {
+        return service.buscarAcademiaPorId(id);
+    }
+
+    public void criarAcademia(Academia academia) {
+        service.criarAcademia(academia);
     }
 
     public void atualizarAcademia(Academia academia) {
-            service.atualizarAcademia(academia);
+        service.atualizarAcademia(academia);
     }
 
     public void removerAcademia(int id) {
-            service.removerAcademia(id);
+        service.removerAcademia(id);
     }
 }

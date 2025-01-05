@@ -1,2 +1,0 @@
-idPass, idAcademia, nomeAcadaemia, categoria, planoMensalPass
-1,2,aaa,bronze,80.0

@@ -1,14 +1,14 @@
-ID,Nome,Telefone,Sede,Filiais,PlanoMensal
-1,Smart Fit,(11)08001-2345,São Paulo,450,79.90
-2,Bodytech,(21)08009-8765,Rio de Janeiro,50,299.90
-3,Bluefit,(11)08001-1122,São Paulo,200,99.90
-4,Bio Ritmo,(11)08003-3344,São Paulo,20,249.90
-5,Cia Athletica,(21)08005-5566,Rio de Janeiro,35,349.90
-6,Ironberg Gym,(11)08007-7788,São Paulo,10,199.90
-7,Academia Competition,(11)08009-9900,São Paulo,15,229.90
-8,Runner,(11)08002-2233,São Paulo,5,149.90
-9,Just Fit,(31)08004-4455,Belo Horizonte,100,89.90
-10,CrossFit Brasil,(11)08006-6677,São Paulo,3,299.90
-11,Les Cinq Gym,(11)08008-8899,São Paulo,1,799.90
-12,Rox Academy,(11)08001-0120,São Paulo,5,189.90
-13,GGGGG,(11)99999-9999,São Paulo,2,100.00
+ID;Nome;Telefone;Sede;Filiais;PlanoMensal
+2;;;;-1;1000.00
+3;Bluefit;(11)08001-1122;São Paulo;200;99.90
+4;Bio Ritmo;(11)08003-3344;São Paulo;20;249.90
+5;Cia Athletica;(21)08005-5566;Rio de Janeiro;35;349.90
+6;Ironberg Gym;(11)08007-7788;São Paulo;10;199.90
+7;Academia Competition;(11)08009-9900;São Paulo;15;229.90
+8;Runner;(11)08002-2233;São Paulo;5;149.90
+9;Just Fit;(31)08004-4455;Belo Horizonte;100;89.90
+10;CrossFit Brasil;(11)08006-6677;São Paulo;3;299.90
+11;Les Cinq Gym;(11)08008-8899;São Paulo;1;799.90
+13;GGGGG;(11)99999-9999;São Paulo;2;100.00
+14;AlmavivaHealth;(11)94848-0909;São Paulo;2;100.00
+15;GGGG;(11)92222-2222;Rio de Janeiro;11;100.00

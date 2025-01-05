@@ -1,60 +1,72 @@
 package br.com.almaviva.academia.services;
 
-import java.util.Set;
-import java.util.logging.Level;
+import java.util.Map;
 import java.util.logging.Logger;
 
+import br.com.almaviva.academia.exceptions.AcademiaNotFoundException;
+import br.com.almaviva.academia.exceptions.UserInputException;
 import br.com.almaviva.academia.model.Academia;
 import br.com.almaviva.academia.repositories.AcademiaRepository;
 import br.com.almaviva.academia.validation.Validacoes;
 
 public class AcademiaService {
+    private final AcademiaRepository repository;
     private static final Logger logger = Logger.getLogger(AcademiaService.class.getName());
-    private final AcademiaRepository repository = new AcademiaRepository();
 
-    public void criarAcademia(Academia academia) {
+    public AcademiaService() {
+        this.repository = new AcademiaRepository();
+    }
+
+    public Map<Integer, Academia> listarAcademias() {
+        logger.info("Listagem de todas as academias solicitada.");
+        return repository.listar();
+    }
+
+    public Academia buscarAcademiaPorId(int id) {
         try {
-            Validacoes.validarAcademia(academia);
-
-            repository.salvar(academia);
-            logger.info("Academia criada com sucesso: " + academia.getNome());
-        } catch (IllegalArgumentException e) {
-            logger.log(Level.WARNING, "Erro de validação ao criar academia: " + e.getMessage());
+            return repository.buscarPorId(id);
+        } catch (AcademiaNotFoundException e) {
+            logger.warning("Academia não encontrada: " + e.getMessage());
+            throw e;
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Erro inesperado ao criar academia: " + e.getMessage());
-            throw new RuntimeException("Erro ao salvar a academia.", e);
+            logger.severe("Erro inesperado ao buscar academia: " + e.getMessage());
+            throw new UserInputException("Erro inesperado ao buscar academia.", e);
         }
     }
 
-    public Set<Academia> listarAcademias() {
+    public void criarAcademia(Academia academia) {
         try {
-            Set<Academia> academias = repository.listarAcademiasDoArquivo();
-            logger.info("Lista de academias recuperada com sucesso.");
-            return academias;
+            Validacoes.validarAcademiaParaCriacao(academia);
+            repository.adicionar(academia);
+            logger.info("Academia criada com sucesso: " + academia.getNome());
         } catch (Exception e) {
-            throw new RuntimeException("Erro ao listar academias.", e);
+            logger.severe("Erro inesperado ao criar academia: " + e.getMessage());
+            throw new UserInputException("Erro inesperado ao criar academia.", e);
         }
     }
 
     public void atualizarAcademia(Academia academia) {
+        Validacoes.validarAcademiaParaAtualizacao(academia);
         try {
-            Validacoes.validarAcademia(academia);
-
             repository.atualizar(academia);
-            logger.info("Academia atualizada com sucesso: " + academia.getNome());
-        } catch (IllegalArgumentException e) {
-            logger.log(Level.WARNING, "Erro de validação ao atualizar academia: " + e.getMessage());
+            logger.info("Academia atualizada com sucesso: " + academia.getId());
+
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Erro inesperado ao atualizar academia: " + e.getMessage());
+            logger.severe("Erro inesperado ao atualizar academia: " + e.getMessage());
+            throw new UserInputException("Erro ao atualizar academia:", e);
         }
     }
 
     public void removerAcademia(int id) {
         try {
-            repository.removerPorId(id);
+            repository.remover(id);
             logger.info("Academia removida com sucesso: ID " + id);
+        } catch (AcademiaNotFoundException e) {
+            logger.warning("Erro ao remover academia: " + e.getMessage());
+            throw e;
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Erro ao remover academia: " + e.getMessage());
+            logger.severe("Erro inesperado ao remover academia: " + e.getMessage());
+            throw new UserInputException("Erro inesperado ao remover academia.", e);
         }
     }
 }
